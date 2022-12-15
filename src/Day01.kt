@@ -1,17 +1,50 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
 
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+//    // test if implementation meets criteria from the description, like:
+//    val testInput = readInput("Day01_test")
+//    println(part1(testInput))
+//    //println(part2(input))
+    //748958
 
     val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    println(cals3Elves(input))
+    //println(part2(input))
 }
+    fun countCalsPerElf(input: List<String>): Int {
+        var maxCount = 0
+        var current = 0
+        for(num in input){
+            if(num != ""){
+                current += num.toInt()
+            }
+            else{
+                if(current > maxCount){
+                    maxCount = current
+                }
+                current = 0
+            }
+        }
+        if(current > maxCount){
+            maxCount = current
+        }
+        return maxCount
+    }
+
+    fun cals3Elves(input: List<String>): Int {
+        val arrayList = ArrayList<Int>()
+        var current = 0
+        for(num in input){
+            if(num != ""){
+                current += num.toInt()
+            }
+            else{
+                arrayList.add(current)
+                current = 0
+            }
+        }
+        val sorted = arrayList.map{it}.sortedDescending()
+        return sorted.take(3).sum()
+    }
+
+
+
